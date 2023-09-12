@@ -17,7 +17,7 @@ export const createSession = async (req, res) => {
     },
   };
 
-  const payload = btoa(JSON.stringify(test_payload));
+  const payload = Buffer.from(JSON.stringify(test_payload)).toString('base64')
   const X_VERIFY = sha256(payload + "/pg/v1/pay" + saltKey) + "###1";
   const url = "https://api.phonepe.com/apis/hermes/pg/v1/pay";
   const headers = {
