@@ -8,9 +8,9 @@ export const createSession = async (req, res) => {
     merchantTransactionId: req.body.merchantTransactionId,
     merchantUserId: req.body.merchantUserId,
     amount: parseInt(req.body.amount) * 100,
-    redirectUrl: "https://www.custompage.com",
+    redirectUrl: "https://www.patientcare247.com/payResponse",
     redirectMode: "REDIRECT",
-    callbackUrl: "https://www.custompage.com",
+    callbackUrl: "https://www.patientcare247.com/payResponse",
     mobileNumber: req.body.phone,
     paymentInstrument: {
       type: "PAY_PAGE",
@@ -33,14 +33,14 @@ export const createSession = async (req, res) => {
       }),
     });
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error(`HTTP error! Status: ${response}`);
     }
     else{
       const responseData = await response.json();
       res.status(200).send(responseData.data);
     }
   } catch (error) {
-     res.status(401).send("Unauthorized");
+     res.status(401).send(`Unauthorized ${error}`);
   }
 };
 
